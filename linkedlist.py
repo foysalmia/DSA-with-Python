@@ -40,7 +40,8 @@ class LinkedList:
         tmp.next = None
         if self.length == 0:
             self.tail = None
-
+        return tmp
+    
     def pop(self):
         if self.length == 0:
             return None
@@ -86,6 +87,19 @@ class LinkedList:
         self.length += 1
         return True
 
+    def remove(self,index):
+        if index < 0 or index >= self.length:
+            return None
+        if index == 0:
+            return self.pop_first()
+        if index == self.length -1:
+            return self.pop()
+        prev = self.get(index - 1)
+        tmp = prev.next
+        prev.next = tmp.next
+        tmp.next = None
+        return tmp
+
     def print_list(self):
         temp = self.head
         while temp is not None:
@@ -98,6 +112,3 @@ class LinkedList:
 
 first_linked_list = LinkedList(2)
 first_linked_list.append(3)
-first_linked_list.print_list()
-first_linked_list.insert(3,5)
-first_linked_list.print_list()
