@@ -100,6 +100,19 @@ class LinkedList:
         tmp.next = None
         return tmp
 
+    def reverse(self):
+        tmp = self.head
+        self.head = self.tail
+        self.tail = tmp
+        after = tmp.next
+        before = None
+        while tmp:
+            after = tmp.next
+            tmp.next = before
+            before = tmp
+            tmp = after
+        return True
+
     def print_list(self):
         temp = self.head
         while temp is not None:
@@ -108,7 +121,3 @@ class LinkedList:
             else:
                 print(temp.value,end='->')
             temp = temp.next
-
-
-first_linked_list = LinkedList(2)
-first_linked_list.append(3)
