@@ -22,6 +22,20 @@ class DublyLinkedList:
         self.length += 1
         return True
     
+    def pop(self):
+        if self.length == 0:
+            return None
+        tmp = self.tail
+        if self.length == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.tail = tmp.prev
+            self.tail.next = None
+            tmp.prev = None
+        self.length -= 1
+        return tmp
+
     def print_list(self):
         tmp = self.head
         while tmp is not None:
@@ -34,4 +48,9 @@ class DublyLinkedList:
 
 dubly_linked_list = DublyLinkedList(1)
 dubly_linked_list.append(2)
+dubly_linked_list.append(3)
 dubly_linked_list.print_list()
+print(dubly_linked_list.pop().value)
+print(dubly_linked_list.pop().value)
+print(dubly_linked_list.pop().value)
+print(dubly_linked_list.pop())
