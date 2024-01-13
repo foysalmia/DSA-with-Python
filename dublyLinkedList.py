@@ -101,6 +101,23 @@ class DublyLinkedList:
         self.length += 1
         return True
 
+    def remove(self,index):
+        if index < 0 or index >= self.length:
+            return None
+        if index == 0:
+            return self.pop_first()
+        if index == self.length - 1:
+            return self.pop()
+        
+        tmp = self.get(index)
+        tmp.next.prev = tmp.prev
+        tmp.prev.next = tmp.next
+        tmp.next = None
+        tmp.prev = None
+
+        self.length -= 1 
+        return tmp
+
     def print_list(self):
         tmp = self.head
         while tmp is not None:
@@ -112,9 +129,3 @@ class DublyLinkedList:
 
 
 dubly_linked_list = DublyLinkedList(1)
-dubly_linked_list.append(2)
-dubly_linked_list.append(3)
-dubly_linked_list.prepend(0)
-dubly_linked_list.print_list()
-dubly_linked_list.insert(4,5)
-dubly_linked_list.print_list()
