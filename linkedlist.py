@@ -63,7 +63,28 @@ class LinkedList:
         tmp = self.head
         for _ in range(0,index):
             tmp = tmp.next
-        return tmp.value
+        return tmp
+
+    def set_value(self,index,value):
+        tmp = self.get(index)
+        if tmp:
+            tmp.value = value
+            return True
+        return False
+
+    def insert(self,index,value):
+        if index < 0 or index > self.length:
+            return False
+        if index == 0:
+            return self.prepend(value)
+        if index == self.length:
+            return self.append(value)
+        new_node = Node(value)
+        tmp = self.get(index-1)
+        new_node.next = tmp.next
+        tmp.next = new_node
+        self.length += 1
+        return True
 
     def print_list(self):
         temp = self.head
@@ -77,23 +98,6 @@ class LinkedList:
 
 first_linked_list = LinkedList(2)
 first_linked_list.append(3)
-print("Before Prepend".center(20))
-print("Head = ",first_linked_list.head.value)
-print("Tail = ",first_linked_list.tail.value)
-print("Length = ",first_linked_list.length)
-print("Linked List => ", end="")
 first_linked_list.print_list()
-
-
-print("After Prepend".center(20))
-first_linked_list.prepend(5)
-print("Head = ",first_linked_list.head.value)
-print("Tail = ",first_linked_list.tail.value)
-print("Length = ",first_linked_list.length)
-print("Linked List => ", end="")
-
-first_linked_list.append(10)
-first_linked_list.append(19)
-first_linked_list.append(12)
+first_linked_list.insert(3,5)
 first_linked_list.print_list()
-print("Index 0 ::>",first_linked_list.get(10))
