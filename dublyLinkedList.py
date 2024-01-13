@@ -11,6 +11,16 @@ class DublyLinkedList:
         self.tail = new_node
         self.length = 1
 
+    def append(self,value):
+        new_node = Node(value)
+        if self.head is None:
+            self.head = new_node
+        else:
+            self.tail.next = new_node
+            new_node.prev = self.tail
+        self.tail = new_node
+        self.length += 1
+        return True
     
     def print_list(self):
         tmp = self.head
@@ -18,9 +28,10 @@ class DublyLinkedList:
             if tmp.value == self.tail.value:
                 print(tmp.value)
             else:
-                print(tmp.value,"<=>",end="")
+                print(tmp.value,"<=> ",end="")
             tmp = tmp.next
 
 
 dubly_linked_list = DublyLinkedList(1)
+dubly_linked_list.append(2)
 dubly_linked_list.print_list()
