@@ -73,7 +73,33 @@ class DublyLinkedList:
             tmp = self.tail
             for _ in range(self.length-1,index,-1):
                 tmp = tmp.prev
-        return tmp.value
+        return tmp
+
+    def set_value(self,index,value):
+        tmp = self.get(index)
+        if tmp:
+            tmp.value = value
+            return True
+        return False
+
+    def insert(self,index,value):
+        if index < 0 or index > self.length:
+            return False
+        if index == 0:
+            return self.prepend(value)
+        if index == self.length:
+            return self.append(value)
+        new_node = Node(value)
+        before = self.get(index-1)
+        after = before.next
+
+        new_node.prev = before
+        before.next = new_node
+        new_node.next = after
+        after.prev = new_node
+
+        self.length += 1
+        return True
 
     def print_list(self):
         tmp = self.head
@@ -90,4 +116,5 @@ dubly_linked_list.append(2)
 dubly_linked_list.append(3)
 dubly_linked_list.prepend(0)
 dubly_linked_list.print_list()
-print(dubly_linked_list.get(2))
+dubly_linked_list.insert(4,5)
+dubly_linked_list.print_list()
