@@ -26,9 +26,11 @@ class HashTable:
                     return self.data_map[index][i][1]
         return None
 
-my_hash = HashTable(7)
-my_hash.set_item('nuts',1400)
-my_hash.set_item('pipe',1000)
-my_hash.set_item('longs',500)
-my_hash.print_table()
-print(my_hash.get("mike"))
+    def keys(self):
+        all_keys = []
+        for i in range(len(self.data_map)):
+            if self.data_map[i] is not None:
+                for j in range(len(self.data_map[i])):
+                    all_keys.append(self.data_map[i][j][0])
+        return all_keys
+
